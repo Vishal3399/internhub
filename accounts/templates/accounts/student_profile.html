@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Update profile — InternHub</title>
+    <style>
+        :root{font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;color:#192638;background:#f6f8fb}*{box-sizing:border-box}body{margin:0}.top{height:70px;background:#fff;border-bottom:1px solid #e9edf3;display:flex;align-items:center}.wrap{width:min(900px,calc(100% - 36px));margin:auto}.brand{font-size:20px;font-weight:800;letter-spacing:-.6px;text-decoration:none;color:#192638}.brand span{display:inline-grid;place-items:center;width:35px;height:35px;border-radius:11px;background:#2766e8;color:white;margin-right:8px}main{padding:35px 0 65px}.card{background:#fff;border:1px solid #e6ebf2;border-radius:16px;padding:32px;box-shadow:0 16px 45px #10284c0a}.back{font-size:13px;color:#6d798d;font-weight:600;text-decoration:none}.back:hover{color:#2766e8}.heading{margin:22px 0 26px}.heading h1{font-size:31px;letter-spacing:-1.2px;margin:0 0 8px}.heading p{font-size:14px;color:#788396;margin:0;line-height:1.6}.grid{display:grid;grid-template-columns:1fr 1fr;gap:17px 18px}.field label{display:block;margin-bottom:7px;font-size:13px;color:#344055;font-weight:700}.field input,.field textarea{width:100%;border:1px solid #dfe5ee;border-radius:8px;background:#fff;padding:0 12px;font:inherit;font-size:13px;outline:none}.field input{height:46px}.field input[type=file]{height:auto;padding:11px}.field input:focus,.field textarea:focus{border-color:#6e98f4;box-shadow:0 0 0 3px #2766e81b}.field ul.errorlist{margin:6px 0 0;padding-left:18px;color:#b42318;font-size:12px}.resume-current{display:block;color:#788396;font-size:12px;margin-top:8px}.resume-current a{color:#2766e8}.full{grid-column:1/-1}.submit{width:100%;height:49px;border:0;border-radius:8px;background:#2766e8;color:#fff;font:inherit;font-size:14px;font-weight:700;margin-top:25px;cursor:pointer}.submit:hover{background:#1954cd}@media(max-width:620px){main{padding:23px 0 45px}.card{padding:23px 18px}.grid{grid-template-columns:1fr}.full{grid-column:auto}.heading h1{font-size:27px}}
+    </style>
+</head>
+<body>
+    <header class="top"><div class="wrap"><a class="brand" href="{% url 'student_dashboard' %}"><span>i</span>InternHub</a></div></header>
+    <main class="wrap">
+        <section class="card">
+            <a class="back" href="{% url 'student_dashboard' %}">←&nbsp; Back to dashboard</a>
+            <div class="heading"><h1>Update your profile</h1><p>Keep your contact, education, skills, and resume up to date.</p></div>
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="grid">
+                    <div class="field"><label for="{{ form.full_name.id_for_label }}">Full name</label>{{ form.full_name }}{{ form.full_name.errors }}</div>
+                    <div class="field"><label for="{{ form.email.id_for_label }}">Email address</label>{{ form.email }}{{ form.email.errors }}</div>
+                    <div class="field"><label for="{{ form.phone.id_for_label }}">Phone number</label>{{ form.phone }}{{ form.phone.errors }}</div>
+                    <div class="field"><label for="{{ form.college.id_for_label }}">College / university</label>{{ form.college }}{{ form.college.errors }}</div>
+                    <div class="field"><label for="{{ form.course.id_for_label }}">Course</label>{{ form.course }}{{ form.course.errors }}</div>
+                    <div class="field"><label for="{{ form.graduation_year.id_for_label }}">Graduation year</label>{{ form.graduation_year }}{{ form.graduation_year.errors }}</div>
+                    <div class="field full"><label for="{{ form.skills.id_for_label }}">Skills</label>{{ form.skills }}{{ form.skills.errors }}</div>
+                    <div class="field full"><label for="{{ form.resume.id_for_label }}">Resume</label>{{ form.resume }}{{ form.resume.errors }}{% if student.resume %}<span class="resume-current">Current resume: <a href="{{ student.resume.url }}">{{ student.resume.name }}</a></span>{% endif %}</div>
+                </div>
+                <button class="submit" type="submit">Save profile&nbsp; →</button>
+            </form>
+        </section>
+    </main>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Create your student account — InternHub</title>
+    <style>
+        :root{font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;color:#192638;background:#f5f7fb}*{box-sizing:border-box}body{margin:0;min-height:100vh}.top{height:70px;background:#fff;border-bottom:1px solid #e8edf4;display:flex;align-items:center}.wrap{width:min(960px,calc(100% - 36px));margin:auto}.brand{font-size:20px;font-weight:800;color:#192638;text-decoration:none;letter-spacing:-.6px}.brand span{color:#2766e8}
+        main{padding:40px 0 70px}.form-card{background:#fff;border:1px solid #e6ebf2;border-radius:18px;padding:34px;box-shadow:0 16px 45px #10284c0a}.back{font-size:13px;color:#6d798d;font-weight:600;text-decoration:none}.back:hover{color:#2766e8}.heading{margin:23px 0 27px}.heading h1{font-size:32px;letter-spacing:-1.2px;margin:0 0 8px}.heading p{color:#788396;margin:0}.error{padding:12px 14px;margin:0 0 20px;color:#b42318;background:#fff0f0;border:1px solid #ffd4d4;border-radius:8px;font-size:14px}
+        .grid{display:grid;grid-template-columns:1fr 1fr;gap:17px 18px}.field label{display:block;margin-bottom:7px;font-size:13px;font-weight:700;color:#344055}.field input{width:100%;height:46px;padding:0 12px;border:1px solid #dfe5ee;border-radius:8px;background:#fff;font:inherit;outline:none}.field input:focus{border-color:#6e98f4;box-shadow:0 0 0 3px #2766e81b}.field input[type=file]{padding:10px;height:auto;font-size:13px}.hint{font-size:12px;color:#8791a1;margin:6px 0 0}.divider{border:0;border-top:1px solid #edf0f5;margin:25px 0 20px}.section-label{text-transform:uppercase;letter-spacing:.08em;font-size:11px;color:#8791a1;font-weight:800;margin:0 0 16px}.submit{width:100%;height:49px;margin-top:24px;border:0;border-radius:9px;background:#2766e8;color:#fff;font:inherit;font-weight:700;cursor:pointer}.submit:hover{background:#1954cd}.signin{text-align:center;color:#788396;font-size:14px;margin:21px 0 0}.signin a{color:#2766e8;font-weight:700;text-decoration:none}
+        @media(max-width:650px){main{padding:25px 0}.form-card{padding:24px 19px}.grid{grid-template-columns:1fr}.heading h1{font-size:28px}}
+    </style>
+</head>
+<body>
+    <header class="top"><div class="wrap"><a class="brand" href="{% url 'index' %}"><span>●</span> InternHub</a></div></header>
+    <main class="wrap"><section class="form-card"><a class="back" href="{% url 'open_loginforms' %}">←&nbsp; Back to sign in</a><div class="heading"><h1>Create your student account</h1><p>Set up your profile and start exploring internship opportunities.</p></div>
+        {% if error %}<p class="error" role="alert">{{ error }}</p>{% endif %}
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <p class="section-label">Your details</p>
+            <div class="grid">
+                <div class="field"><label for="full_name">Full name</label><input type="text" id="full_name" name="full_name" placeholder="e.g. Alex Morgan" autocomplete="name" required></div>
+                <div class="field"><label for="email">Email address</label><input type="email" id="email" name="email" placeholder="you@example.com" autocomplete="email" required></div>
+                <div class="field"><label for="phone">Phone number</label><input type="tel" id="phone" name="phone" placeholder="+91 98765 43210" autocomplete="tel" required></div>
+                <div class="field"><label for="college">College / university</label><input type="text" id="college" name="college" placeholder="Your institution" required></div>
+                <div class="field"><label for="course">Course</label><input type="text" id="course" name="course" placeholder="e.g. BCA, B.Tech, MCA" required></div>
+                <div class="field"><label for="graduation_year">Graduation year</label><input type="number" id="graduation_year" name="graduation_year" placeholder="e.g. 2027" required></div>
+                <div class="field"><label for="skills">Skills</label><input type="text" id="skills" name="skills" placeholder="Python, design, communication"><p class="hint">Separate skills with commas.</p></div>
+                <div class="field"><label for="resume">Resume</label><input type="file" id="resume" name="resume" accept=".pdf,.doc,.docx"><p class="hint">PDF or Word document.</p></div>
+            </div>
+            <hr class="divider"><p class="section-label">Secure your account</p>
+            <div class="grid">
+                <div class="field"><label for="password">Password</label><input type="password" id="password" name="password" placeholder="Create a password" autocomplete="new-password" required></div>
+                <div class="field"><label for="confirm_password">Confirm password</label><input type="password" id="confirm_password" name="confirm_password" placeholder="Enter it again" autocomplete="new-password" required></div>
+            </div>
+            <button class="submit" type="submit">Create student account&nbsp; →</button>
+        </form>
+        <p class="signin">Already have an account? <a href="{% url 'open_login' %}">Sign in</a></p>
+    </section></main>
+</body>
+</html>

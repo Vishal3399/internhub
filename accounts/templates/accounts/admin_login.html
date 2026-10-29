@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Administrator sign in — InternHub</title>
+    <style>
+        :root{font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;color:#192638;background:#f3f5f9}*{box-sizing:border-box}body{margin:0;min-height:100vh;display:grid;place-items:center;padding:24px}.layout{width:min(920px,100%);min-height:540px;display:grid;grid-template-columns:.9fr 1.1fr;background:#fff;border-radius:20px;overflow:hidden;box-shadow:0 22px 65px #13264b1a}.side{background:linear-gradient(150deg,#11264b,#2766e8);color:#fff;padding:38px;display:flex;flex-direction:column;justify-content:space-between}.brand{font-size:20px;font-weight:800;text-decoration:none;color:white}.brand span{display:inline-grid;place-items:center;width:36px;height:36px;border-radius:11px;background:#ffffff25;margin-right:8px}.side-copy h1{font-size:37px;letter-spacing:-1.8px;line-height:1.1;margin:0 0 13px}.side-copy p{color:#d4e0f6;line-height:1.7;margin:0}.side-foot{font-size:12px;color:#bfd0ef}.content{padding:54px 58px;display:flex;flex-direction:column;justify-content:center}.back{font-size:13px;color:#6c788c;font-weight:600;text-decoration:none}.back:hover{color:#2766e8}.content h2{font-size:30px;letter-spacing:-1px;margin:35px 0 7px}.sub{color:#788396;margin:0 0 24px;font-size:14px}.error{padding:12px 14px;margin:0 0 17px;color:#b42318;background:#fff0f0;border:1px solid #ffd4d4;border-radius:8px;font-size:14px}.field{margin-bottom:18px}.field label{display:block;font-size:13px;font-weight:700;margin-bottom:8px}.field input{width:100%;height:47px;border:1px solid #dfe5ee;border-radius:8px;padding:0 13px;font:inherit;outline:none}.field input:focus{border-color:#6e98f4;box-shadow:0 0 0 3px #2766e81b}.submit{height:48px;width:100%;border:0;border-radius:8px;background:#192c50;color:white;font:inherit;font-weight:700;cursor:pointer}.submit:hover{background:#2766e8}.secure{font-size:12px;color:#8993a3;text-align:center;margin:17px 0 0}@media(max-width:700px){.layout{grid-template-columns:1fr}.side{padding:24px;min-height:180px}.side-copy h1{font-size:27px;margin:24px 0 7px}.side-copy p,.side-foot{display:none}.content{padding:30px 24px}.content h2{margin-top:27px}}
+    </style>
+</head>
+<body>
+    <div class="layout">
+        <aside class="side"><a class="brand" href="{% url 'index' %}"><span>i</span>InternHub</a><div class="side-copy"><h1>Platform administration.</h1><p>Sign in to manage the InternHub experience.</p></div><div class="side-foot">Authorized administrators only</div></aside>
+        <main class="content"><a class="back" href="{% url 'open_loginforms' %}">←&nbsp; All sign in options</a><h2>Administrator sign in</h2><p class="sub">Use your administrator credentials to continue.</p>
+            {% if error %}<p class="error" role="alert">{{ error }}</p>{% endif %}
+            <form action="{% url 'open_adminlogin' %}" method="post">{% csrf_token %}
+                <div class="field"><label for="username">Username</label><input type="text" id="username" name="username" placeholder="Enter your username" autocomplete="username" required></div>
+                <div class="field"><label for="password">Password</label><input type="password" id="password" name="password" placeholder="Enter your password" autocomplete="current-password" required></div>
+                <button class="submit" type="submit">Sign in as administrator&nbsp; →</button>
+            </form><p class="secure">Your administrator credentials are handled securely.</p>
+        </main>
+    </div>
+</body>
+</html>

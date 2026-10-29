@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Create a company account — InternHub</title>
+    <style>
+        :root{font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;color:#192638;background:#f5f7fb}*{box-sizing:border-box}body{margin:0}.top{height:70px;background:#fff;border-bottom:1px solid #e8edf4;display:flex;align-items:center}.wrap{width:min(900px,calc(100% - 36px));margin:auto}.brand{font-size:20px;font-weight:800;color:#192638;text-decoration:none;letter-spacing:-.6px}.brand span{color:#2766e8}main{padding:40px 0 70px}.card{background:#fff;border:1px solid #e6ebf2;border-radius:18px;padding:34px;box-shadow:0 16px 45px #10284c0a}.back{font-size:13px;color:#6d798d;text-decoration:none;font-weight:600}.back:hover{color:#2766e8}.heading{margin:23px 0 27px}.heading h1{font-size:32px;letter-spacing:-1.2px;margin:0 0 8px}.heading p{color:#788396;margin:0}.error{padding:12px 14px;margin:0 0 20px;color:#b42318;background:#fff0f0;border:1px solid #ffd4d4;border-radius:8px;font-size:14px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:17px 18px}.field label{display:block;margin-bottom:7px;font-size:13px;font-weight:700;color:#344055}.field input,.field textarea{width:100%;padding:0 12px;border:1px solid #dfe5ee;border-radius:8px;background:#fff;font:inherit;outline:none}.field input{height:46px}.field textarea{padding:12px;min-height:108px;resize:vertical}.field input:focus,.field textarea:focus{border-color:#6e98f4;box-shadow:0 0 0 3px #2766e81b}.full{grid-column:1/-1}.submit{width:100%;height:49px;margin-top:24px;border:0;border-radius:9px;background:#2766e8;color:#fff;font:inherit;font-weight:700;cursor:pointer}.submit:hover{background:#1954cd}.signin{text-align:center;color:#788396;font-size:14px;margin:21px 0 0}.signin a{color:#2766e8;font-weight:700;text-decoration:none}@media(max-width:650px){main{padding:25px 0}.card{padding:24px 19px}.grid{grid-template-columns:1fr}.full{grid-column:auto}.heading h1{font-size:28px}}
+    </style>
+</head>
+<body>
+    <header class="top"><div class="wrap"><a class="brand" href="{% url 'index' %}"><span>●</span> InternHub</a></div></header>
+    <main class="wrap"><section class="card"><a class="back" href="{% url 'open_industrylogin' %}">←&nbsp; Back to company sign in</a><div class="heading"><h1>Create a company account</h1><p>Tell us about your company and start sharing opportunities with students.</p></div>
+        {% if error %}<p class="error" role="alert">{{ error }}</p>{% endif %}
+        <form method="post">{% csrf_token %}
+            <div class="grid">
+                <div class="field"><label for="company_name">Company name</label><input type="text" id="company_name" name="company_name" placeholder="Your company" autocomplete="organization" required></div>
+                <div class="field"><label for="email">Official email</label><input type="email" id="email" name="email" placeholder="you@company.com" autocomplete="email" required></div>
+                <div class="field"><label for="phone_number">Phone number</label><input type="tel" id="phone_number" name="phone_number" placeholder="+91 98765 43210" autocomplete="tel" required></div>
+                <div class="field"><label for="company_website">Company website</label><input type="url" id="company_website" name="company_website" placeholder="https://example.com"></div>
+                <div class="field"><label for="industry_type">Industry type</label><input type="text" id="industry_type" name="industry_type" placeholder="e.g. Technology, Finance" required></div>
+                <div class="field"><label for="location">Location</label><input type="text" id="location" name="location" placeholder="City, country" required></div>
+                <div class="field full"><label for="description">Company description</label><textarea id="description" name="description" placeholder="Tell students a little about your company"></textarea></div>
+                <div class="field"><label for="password">Password</label><input type="password" id="password" name="password" placeholder="Create a password" autocomplete="new-password" required></div>
+                <div class="field"><label for="confirm_password">Confirm password</label><input type="password" id="confirm_password" name="confirm_password" placeholder="Enter it again" autocomplete="new-password" required></div>
+            </div>
+            <button class="submit" type="submit">Create company account&nbsp; →</button>
+        </form>
+        <p class="signin">Already have an account? <a href="{% url 'open_industrylogin' %}">Sign in</a></p>
+    </section></main>
+</body>
+</html>

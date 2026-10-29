@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Edit {{ internship.title }} — InternHub</title>
+    <style>
+        :root{font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;color:#192638;background:#f6f8fb}*{box-sizing:border-box}body{margin:0}.top{height:70px;background:#fff;border-bottom:1px solid #e9edf3;display:flex;align-items:center}.wrap{width:min(900px,calc(100% - 36px));margin:auto}.brand{font-size:20px;font-weight:800;letter-spacing:-.6px;text-decoration:none;color:#192638}.brand span{display:inline-grid;place-items:center;width:35px;height:35px;border-radius:11px;background:#2766e8;color:white;margin-right:8px}main{padding:35px 0 65px}.card{background:#fff;border:1px solid #e6ebf2;border-radius:16px;padding:32px;box-shadow:0 16px 45px #10284c0a}.back{font-size:13px;color:#6d798d;font-weight:600;text-decoration:none}.back:hover{color:#2766e8}.heading{margin:22px 0 26px}.heading h1{font-size:31px;letter-spacing:-1.2px;margin:0 0 8px}.heading p{font-size:14px;color:#788396;margin:0;line-height:1.6}.section-title{font-size:11px;text-transform:uppercase;letter-spacing:.1em;color:#8791a1;font-weight:800;margin:25px 0 15px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:17px 18px}.field label{display:block;margin-bottom:7px;font-size:13px;color:#344055;font-weight:700}.field input,.field select,.field textarea{width:100%;border:1px solid #dfe5ee;border-radius:8px;background:#fff;padding:10px 12px;font:inherit;font-size:13px;outline:none}.field input,.field select{height:46px;padding:0 12px}.field textarea{min-height:105px;resize:vertical;line-height:1.6}.field input:focus,.field select:focus,.field textarea:focus{border-color:#6e98f4;box-shadow:0 0 0 3px #2766e81b}.field ul.errorlist{color:#b42318;font-size:12px;padding-left:18px}.full{grid-column:1/-1}.submit{width:100%;height:49px;border:0;border-radius:8px;background:#2766e8;color:#fff;font:inherit;font-size:14px;font-weight:700;margin-top:25px;cursor:pointer}.submit:hover{background:#1954cd}@media(max-width:620px){main{padding:23px 0 45px}.card{padding:23px 18px}.grid{grid-template-columns:1fr}.full{grid-column:auto}.heading h1{font-size:27px}}
+    </style>
+</head>
+<body>
+    <header class="top"><div class="wrap"><a class="brand" href="{% url 'admin_dashboard' %}"><span>i</span>InternHub</a></div></header>
+    <main class="wrap">
+        <section class="card">
+            <a class="back" href="{% url 'admin_dashboard' %}">←&nbsp; Back to admin dashboard</a>
+            <div class="heading"><h1>Edit internship</h1><p>Update the details for {{ internship.title }}.</p></div>
+            <form method="post">
+                {% csrf_token %}
+                <p class="section-title">Opportunity details</p>
+                <div class="grid">
+                    <div class="field"><label for="{{ form.title.id_for_label }}">Internship title</label>{{ form.title }}{{ form.title.errors }}</div>
+                    <div class="field"><label for="{{ form.company.id_for_label }}">Company</label>{{ form.company }}{{ form.company.errors }}</div>
+                    <div class="field"><label for="{{ form.location.id_for_label }}">Location</label>{{ form.location }}{{ form.location.errors }}</div>
+                    <div class="field"><label for="{{ form.work_mode.id_for_label }}">Work mode</label>{{ form.work_mode }}{{ form.work_mode.errors }}</div>
+                    <div class="field"><label for="{{ form.duration.id_for_label }}">Duration</label>{{ form.duration }}{{ form.duration.errors }}</div>
+                    <div class="field"><label for="{{ form.stipend.id_for_label }}">Stipend</label>{{ form.stipend }}{{ form.stipend.errors }}</div>
+                    <div class="field"><label for="{{ form.skills.id_for_label }}">Skills</label>{{ form.skills }}{{ form.skills.errors }}</div>
+                    <div class="field"><label for="{{ form.last_date.id_for_label }}">Application deadline</label>{{ form.last_date }}{{ form.last_date.errors }}</div>
+                </div>
+                <p class="section-title">Role description</p>
+                <div class="grid">
+                    <div class="field full"><label for="{{ form.about.id_for_label }}">About the internship</label>{{ form.about }}{{ form.about.errors }}</div>
+                    <div class="field full"><label for="{{ form.responsibilities.id_for_label }}">Responsibilities</label>{{ form.responsibilities }}{{ form.responsibilities.errors }}</div>
+                    <div class="field full"><label for="{{ form.requirements.id_for_label }}">Requirements</label>{{ form.requirements }}{{ form.requirements.errors }}</div>
+                </div>
+                <button class="submit" type="submit">Save changes&nbsp; →</button>
+            </form>
+        </section>
+    </main>
+</body>
+</html>

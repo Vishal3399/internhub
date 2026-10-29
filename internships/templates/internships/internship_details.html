@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{ internship.title }} — InternHub</title>
+    <style>
+        :root{font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;color:#192638;background:#f6f8fb}*{box-sizing:border-box}body{margin:0}a{color:inherit;text-decoration:none}.wrap{width:min(1100px,calc(100% - 40px));margin:auto}header{height:70px;background:#fff;border-bottom:1px solid #e9edf3}.nav{height:100%;display:flex;align-items:center;justify-content:space-between}.brand{font-size:20px;font-weight:800;letter-spacing:-.6px}.brand span{display:inline-grid;place-items:center;width:35px;height:35px;border-radius:11px;background:#2766e8;color:#fff;margin-right:8px}.navlinks{display:flex;gap:24px;color:#657184;font-size:13px;font-weight:600}.navlinks a:hover{color:#2766e8}.main{padding:30px 0 65px}.back{font-size:13px;color:#687487;font-weight:600}.back:hover{color:#2766e8}.columns{display:grid;grid-template-columns:1fr 315px;gap:19px;align-items:start;margin-top:21px}.panel,.aside{background:#fff;border:1px solid #e6ebf2;border-radius:14px}.panel{padding:30px}.company{font-size:13px;color:#2766e8;font-weight:700}.title{font-size:34px;letter-spacing:-1.4px;margin:9px 0 18px;line-height:1.2}                .meta{display:flex;flex-wrap:wrap;gap:10px 18px;color:#687487;font-size:13px;padding-bottom:21px;border-bottom:1px solid #edf0f5}.chip{display:inline-flex;align-items:center;padding:7px 10px;border-radius:20px;background:#eef3ff;color:#245bd0;font-size:11px;font-weight:700}.section{padding-top:23px}.section h2{font-size:16px;margin:0 0 10px}.section p{font-size:14px;color:#667286;line-height:1.8;margin:0;white-space:pre-line}.skills{display:flex;flex-wrap:wrap;gap:8px}.skill{padding:7px 10px;border:1px solid #e5eaf1;background:#f8faff;border-radius:20px;color:#53627a;font-size:12px}.aside{padding:22px;position:sticky;top:18px}.stipend-label,.small-label{font-size:11px;color:#788396;font-weight:700;text-transform:uppercase;letter-spacing:.06em}.stipend{font-size:24px;font-weight:800;letter-spacing:-.7px;margin:7px 0 18px}.deadline{padding:15px 0;border-top:1px solid #edf0f5;border-bottom:1px solid #edf0f5}.deadline strong{display:block;margin-top:6px;font-size:14px}.apply{display:flex;width:100%;justify-content:center;margin-top:18px;padding:13px;border:0;border-radius:8px;background:#2766e8;color:#fff;font-family:inherit;font-size:13px;font-weight:700;cursor:pointer}.apply:hover{background:#1954cd}.apply:disabled{background:#e8f5ed;color:#24834b;cursor:default}.notice{margin:0 0 18px;padding:12px 15px;border:1px solid #cce9d7;border-radius:9px;background:#effaf3;color:#22643b;font-size:13px}.footer{border-top:1px solid #e9edf3;background:#fff;padding:20px 0;color:#8993a3;font-size:12px}.foot{display:flex;justify-content:space-between;gap:15px}
+        @media(max-width:760px){.columns{grid-template-columns:1fr}.aside{position:static;grid-row:1}.panel{padding:23px}.title{font-size:29px}.navlinks{gap:12px;font-size:12px}}@media(max-width:520px){.navlinks a:nth-child(2){display:none}.wrap{width:calc(100% - 30px)}.foot{flex-direction:column}}
+    </style>
+</head>
+<body>
+    <header><nav class="wrap nav"><a class="brand" href="{% url 'index' %}"><span>i</span>InternHub</a><div class="navlinks"><a href="{% url 'internship_index' %}">Internships</a><a href="{% url 'open_aboutus' %}">About</a>{% if is_student %}<a href="{% url 'student_dashboard' %}">Student dashboard</a><a href="{% url 'account_logout' %}">Sign out</a>{% else %}<a href="{% url 'open_loginforms' %}">Sign in</a>{% endif %}</div></nav></header>
+    <main class="wrap main">
+        {% if messages %}{% for message in messages %}<p class="notice">{{ message }}</p>{% endfor %}{% endif %}
+        <a class="back" href="{% url 'internship_index' %}">←&nbsp; Back to internships</a>
+        <div class="columns">
+            <article class="panel">
+                <span class="company">{{ internship.company }}</span><h1 class="title">{{ internship.title }}</h1>
+                <div class="meta"><span>⌖&nbsp; {{ internship.location }}</span><span>◷&nbsp; {{ internship.duration }}</span><span class="chip">{{ internship.work_mode }}</span></div>
+                <section class="section"><h2>About the internship</h2><p>{{ internship.about }}</p></section>
+                <section class="section"><h2>Responsibilities</h2><p>{{ internship.responsibilities }}</p></section>
+                <section class="section"><h2>Requirements</h2><p>{{ internship.requirements }}</p></section>
+                <section class="section"><h2>Skills</h2><div class="skills"><span class="skill">{{ internship.skills }}</span></div></section>
+            </article>
+            <aside class="aside">
+                <span class="stipend-label">Stipend</span><div class="stipend">{{ internship.stipend }}</div>
+                <div class="deadline"><span class="small-label">Application deadline</span><strong>{{ internship.last_date|date:"F j, Y" }}</strong></div>
+                {% if is_student and has_applied %}
+                    <button class="apply" type="button" disabled>Applied</button>
+                {% elif is_student %}
+                    <form method="post" action="{% url 'apply_to_internship' internship.id %}">{% csrf_token %}<button class="apply" type="submit">Apply</button></form>
+                {% else %}
+                    <a class="apply" href="{% url 'open_loginforms' %}">Sign in to apply&nbsp; →</a>
+                {% endif %}
+            </aside>
+        </div>
+    </main>
+    <footer class="footer"><div class="wrap foot"><span>© InternHub. Helping students take their next step.</span><a href="{% url 'open_aboutus' %}">About InternHub</a></div></footer>
+</body>
+</html>

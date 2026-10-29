@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Admin dashboard — InternHub</title>
+    <style>
+        :root{font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;color:#192638;background:#f6f8fb}*{box-sizing:border-box}body{margin:0}.shell{display:grid;grid-template-columns:238px 1fr;min-height:100vh}.sidebar{background:#15284c;color:#d7e1f4;padding:24px 16px;display:flex;flex-direction:column}.brand{display:flex;align-items:center;gap:10px;padding:3px 12px 29px;text-decoration:none;color:white;font-weight:800;font-size:20px;letter-spacing:-.6px}.brand span{display:grid;place-items:center;width:35px;height:35px;border-radius:11px;background:#2766e8}.nav-label{padding:0 12px;margin:15px 0 9px;color:#8fa2c3;font-size:10px;font-weight:800;letter-spacing:.12em;text-transform:uppercase}.nav-link{display:flex;align-items:center;gap:12px;padding:11px 12px;color:#d7e1f4;text-decoration:none;border-radius:9px;font-size:13px;font-weight:600}.nav-link:hover,.nav-link.active{background:#ffffff18;color:#fff}.nav-link.active{box-shadow:inset 3px 0 #75a0ff}.sidebar-foot{margin-top:auto;padding:15px 12px;border-top:1px solid #ffffff1c;color:#aebed9;font-size:12px;line-height:1.6}.main{min-width:0}.topbar{height:70px;background:#fff;border-bottom:1px solid #e9edf3;display:flex;align-items:center;justify-content:space-between;padding:0 34px}.crumb{font-size:13px;color:#788396}.admin{font-size:13px;font-weight:700;display:flex;align-items:center;gap:9px}.avatar{width:34px;height:34px;border-radius:50%;background:#e6edff;color:#2766e8;display:grid;place-items:center}.content{width:min(1240px,100%);margin:auto;padding:34px}.eyebrow{font-size:11px;color:#2766e8;font-weight:800;text-transform:uppercase;letter-spacing:.1em}.welcome{display:flex;justify-content:space-between;align-items:flex-end;gap:20px}.welcome h1{font-size:29px;letter-spacing:-1px;margin:8px 0}.welcome p{font-size:14px;color:#788396;margin:0;line-height:1.6}.button,.small-button{display:inline-flex;align-items:center;justify-content:center;background:#2766e8;border:0;border-radius:8px;padding:11px 15px;color:#fff;text-decoration:none;font:inherit;font-size:13px;font-weight:700;cursor:pointer}.button:hover,.small-button:hover{background:#1954cd}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:24px 0}.stat{padding:18px 20px;background:#fff;border:1px solid #e7ecf3;border-radius:12px}.stat span{font-size:12px;color:#788396}.stat strong{display:block;font-size:23px;margin-top:7px}.panel{background:#fff;border:1px solid #e7ecf3;border-radius:13px;margin-top:18px;overflow:hidden}.panel-head{padding:20px 22px;display:flex;align-items:center;justify-content:space-between;gap:15px;border-bottom:1px solid #edf0f5}.panel-head h2{font-size:16px;margin:0}.panel-head p{font-size:12px;color:#788396;margin:5px 0 0}.table-wrap{overflow-x:auto}table{width:100%;border-collapse:collapse;text-align:left;white-space:nowrap}th{padding:12px 17px;background:#f9fafc;color:#788396;font-size:10px;letter-spacing:.07em;text-transform:uppercase}td{padding:13px 17px;border-top:1px solid #edf0f5;font-size:12px;color:#536074}td strong{color:#25334a;font-size:13px}.muted{color:#8791a1}.actions{display:flex;align-items:center;gap:8px}.small-button{padding:7px 10px;font-size:11px}.danger{background:#fff0f0;color:#b42318}.danger:hover{background:#ffe0e0}.empty{padding:22px;color:#788396;font-size:13px}.footer{padding:18px 34px;border-top:1px solid #e9edf3;color:#8993a3;font-size:12px}
+        @media(max-width:850px){.shell{grid-template-columns:68px 1fr}.sidebar{padding:20px 9px;align-items:center}.brand{padding:2px 0 27px;font-size:0}.brand span{font-size:16px}.nav-label,.nav-link span:last-child,.sidebar-foot{display:none}.nav-link{justify-content:center;width:46px;font-size:17px}.topbar{padding:0 18px}.content{padding:25px 17px}.stats{gap:9px}.stat{padding:14px}}@media(max-width:600px){.stats{grid-template-columns:1fr}.welcome{align-items:flex-start;flex-direction:column}.welcome h1{font-size:25px}.topbar{height:58px}.panel-head{padding:16px;align-items:flex-start}.panel-head .button{padding:9px;font-size:11px}.footer{padding:16px}}
+    </style>
+</head>
+<body>
+    <div class="shell">
+        <aside class="sidebar">
+            <a class="brand" href="{% url 'index' %}"><span>i</span>InternHub</a>
+            <div class="nav-label">Administration</div>
+            <a class="nav-link active" href="{% url 'admin_dashboard' %}"><span>▦</span><span>Overview</span></a>
+            <a class="nav-link" href="{% url 'internship_index' %}"><span>▤</span><span>Public listings</span></a>
+            <a class="nav-link" href="{% url 'admin:index' %}"><span>⚙</span><span>Django admin</span></a>
+            <div class="nav-label">Account</div>
+            <a class="nav-link" href="{% url 'account_logout' %}"><span>↪</span><span>Sign out</span></a>
+            <div class="sidebar-foot">Manage opportunities and review registered accounts.</div>
+        </aside>
+        <div class="main">
+            <header class="topbar"><span class="crumb">Administration&nbsp; / &nbsp;Overview</span><div class="admin"><span class="avatar">A</span>Administrator</div></header>
+            <main class="content">
+                <section class="welcome"><div><span class="eyebrow">Platform management</span><h1>Admin dashboard</h1><p>Manage internships and review the students and industries registered on InternHub.</p></div><a class="button" href="{% url 'add_internship' %}">＋&nbsp; Add internship</a></section>
+                <section class="stats" aria-label="Platform totals">
+                    <article class="stat"><span>Internships</span><strong>{{ internships|length }}</strong></article>
+                    <article class="stat"><span>Registered industries</span><strong>{{ industries|length }}</strong></article>
+                    <article class="stat"><span>Registered students</span><strong>{{ students|length }}</strong></article>
+                </section>
+                <section class="panel" id="internships">
+                    <div class="panel-head"><div><h2>Internships</h2><p>Edit, remove, or add an opportunity.</p></div><a class="button" href="{% url 'add_internship' %}">＋&nbsp; Add internship</a></div>
+                    <div class="table-wrap"><table><thead><tr><th>Position</th><th>Company</th><th>Location</th><th>Work mode</th><th>Deadline</th><th>Actions</th></tr></thead><tbody>
+                        {% for internship in internships %}
+                            <tr><td><strong>{{ internship.title }}</strong></td><td>{{ internship.company }}</td><td>{{ internship.location }}</td><td>{{ internship.work_mode }}</td><td>{{ internship.last_date|date:"M j, Y" }}</td><td><div class="actions"><a class="small-button" href="{% url 'admin_edit_internship' internship.id %}">Edit</a><form method="post" action="{% url 'admin_delete_internship' internship.id %}">{% csrf_token %}<button class="small-button danger" type="submit">Delete</button></form></div></td></tr>
+                        {% empty %}<tr><td colspan="6" class="empty">No internships have been posted yet.</td></tr>{% endfor %}
+                    </tbody></table></div>
+                </section>
+                <section class="panel" id="industries">
+                    <div class="panel-head"><div><h2>Registered industries</h2><p>Companies that have created an InternHub account.</p></div></div>
+                    <div class="table-wrap"><table><thead><tr><th>Company</th><th>Industry</th><th>Email</th><th>Location</th><th>Phone</th><th>Registered</th><th>Actions</th></tr></thead><tbody>
+                        {% for industry in industries %}
+                            <tr><td><strong>{{ industry.company_name }}</strong></td><td>{{ industry.industry_type }}</td><td>{{ industry.email }}</td><td>{{ industry.location }}</td><td>{{ industry.phone_number }}</td><td>{{ industry.created_at|date:"M j, Y" }}</td><td><form method="post" action="{% url 'admin_delete_industry' industry.id %}" onsubmit="return confirm('Delete this company and its internship listings?');">{% csrf_token %}<button class="small-button danger" type="submit">Delete company</button></form></td></tr>
+                        {% empty %}<tr><td colspan="7" class="empty">No industries have registered yet.</td></tr>{% endfor %}
+                    </tbody></table></div>
+                </section>
+                <section class="panel" id="students">
+                    <div class="panel-head"><div><h2>Registered students</h2><p>Student accounts and their education details.</p></div></div>
+                    <div class="table-wrap"><table><thead><tr><th>Student</th><th>Email</th><th>College</th><th>Course</th><th>Graduation</th><th>Registered</th><th>Actions</th></tr></thead><tbody>
+                        {% for student in students %}
+                            <tr><td><strong>{{ student.full_name }}</strong></td><td>{{ student.email }}</td><td>{{ student.college }}</td><td>{{ student.course }}</td><td>{{ student.graduation_year }}</td><td>{{ student.created_at|date:"M j, Y" }}</td><td><form method="post" action="{% url 'admin_delete_student' student.id %}">{% csrf_token %}<button class="small-button danger" type="submit">Delete</button></form></td></tr>
+                        {% empty %}<tr><td colspan="7" class="empty">No students have registered yet.</td></tr>{% endfor %}
+                    </tbody></table></div>
+                </section>
+            </main>
+            <footer class="footer">© InternHub. Platform administration.</footer>
+        </div>
+    </div>
+</body>
+</html>
